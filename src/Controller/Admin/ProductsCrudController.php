@@ -39,6 +39,6 @@ class ProductsCrudController extends AbstractCrudController
         yield MoneyField::new('pricePerUnit')->setCurrency('EUR')->setNumDecimals(2)->setRequired(true)->setTextAlign('left');
         yield IntegerField::new('stock');
         yield TextField::new('unitType');
-        yield AssociationField::new('Tags')->autocomplete(true);
+        yield AssociationField::new('Tags')->autocomplete(true)->setHelp("<a href='cms?crudAction=new&crudControllerFqcn=App%5CController%5CAdmin%5CTagsCrudController&signature=gty7VM2vVBwwDrFPrZC50o4HjheZD5O7doqD24tSLfM'>Can't find the right Tag? Try to add tags!</a>");
     }
 }
