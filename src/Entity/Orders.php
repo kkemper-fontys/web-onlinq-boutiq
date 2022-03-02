@@ -17,7 +17,7 @@ class Orders
     #[ORM\Column(type: 'datetime_immutable')]
     private $createdAt;
 
-    #[ORM\OneToOne(targetEntity: customers::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Customers::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private $customer;
 
