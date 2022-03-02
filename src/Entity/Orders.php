@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\OrdersRepository;
 use Doctrine\ORM\Mapping as ORM;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 
 #[ORM\Entity(repositoryClass: OrdersRepository::class)]
 class Orders
@@ -30,9 +31,9 @@ class Orders
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(): self
     {
-        $this->createdAt = $createdAt;
+        $this->createdAt = DateTimeField::new('createdAt')->setFormat("dd-MM-yyyy HH:mm");
 
         return $this;
     }
