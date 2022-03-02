@@ -35,6 +35,9 @@ class Products
     #[ORM\ManyToMany(targetEntity: Tags::class)]
     private $Tags;
 
+    #[ORM\Column(type: 'json', nullable: true)]
+    private $images = [];
+
     public function __construct()
     {
         $this->Tags = new ArrayCollection();
@@ -125,6 +128,18 @@ class Products
     public function removeTag(Tags $tag): self
     {
         $this->Tags->removeElement($tag);
+
+        return $this;
+    }
+
+    public function getImages(): ?array
+    {
+        return $this->images;
+    }
+
+    public function setImages(?array $images): self
+    {
+        $this->images = $images;
 
         return $this;
     }

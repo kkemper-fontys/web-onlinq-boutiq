@@ -6,10 +6,12 @@ use App\Entity\Products;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class ProductsCrudController extends AbstractCrudController
@@ -40,5 +42,7 @@ class ProductsCrudController extends AbstractCrudController
         yield IntegerField::new('stock');
         yield TextField::new('unitType');
         yield AssociationField::new('Tags')->autocomplete(true)->setHelp("<a href='cms?crudAction=new&crudControllerFqcn=App%5CController%5CAdmin%5CTagsCrudController&signature=gty7VM2vVBwwDrFPrZC50o4HjheZD5O7doqD24tSLfM'>Can't find the right Tag? Try to add tags!</a>");
+//        yield ImageField::new('Images')->setBasePath('uploads/images/')->setUploadDir('assets/uploads/')->setUploadedFileNamePattern('upload_%d%M%y%h%m%s.[extension]')->hideOnIndex();
+        yield CollectionField::new('images')->allowAdd(true)->allowDelete(true)->setEntryType(FileUploadType::class);
     }
 }
