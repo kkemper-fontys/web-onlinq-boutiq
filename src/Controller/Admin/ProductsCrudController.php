@@ -43,6 +43,10 @@ class ProductsCrudController extends AbstractCrudController
         yield TextField::new('unitType');
         yield AssociationField::new('Tags')->autocomplete(true)->setHelp("<a href='cms?crudAction=new&crudControllerFqcn=App%5CController%5CAdmin%5CTagsCrudController&signature=gty7VM2vVBwwDrFPrZC50o4HjheZD5O7doqD24tSLfM'>Can't find the right Tag? Try to add tags!</a>");
 //        yield ImageField::new('Images')->setBasePath('uploads/images/')->setUploadDir('assets/uploads/')->setUploadedFileNamePattern('upload_%d%M%y%h%m%s.[extension]')->hideOnIndex();
-        yield CollectionField::new('images')->allowAdd(true)->allowDelete(true)->setEntryType(FileUploadType::class);
+        yield CollectionField::new('images')->allowAdd(true)->allowDelete(true)->setEntryType(FileUploadType::class)->setFormTypeOptions([
+            'entry_options' => [
+                'upload_filename' => '[slug]-[contenthash].[extension]',
+            ]
+        ]);
     }
 }
