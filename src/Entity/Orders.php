@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 
 #[ORM\Entity(repositoryClass: OrdersRepository::class)]
+#[ORM\Table(name: 'orders')]
 class Orders
 {
     #[ORM\Id]
@@ -38,12 +39,12 @@ class Orders
         return $this;
     }
 
-    public function getCustomer(): ?customers
+    public function getCustomer(): ?Customers
     {
         return $this->customer;
     }
 
-    public function setCustomer(customers $customer): self
+    public function setCustomer(Customers $customer): self
     {
         $this->customer = $customer;
 
