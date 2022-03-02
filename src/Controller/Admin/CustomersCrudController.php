@@ -30,15 +30,13 @@ class CustomersCrudController extends AbstractCrudController
     {
         yield TextField::new('firstName');
         yield TextField::new('lastName');
-        yield EmailField::new('email');
-
-        $createdAt = DateTimeField::new('createdAt')->setFormat("dd-MM-yyyy HH:mm");
-
-        yield TextField::new('address');
-        yield TextField::new('zipcode');
-        yield TextField::new('city');
-
-        if (Crud::PAGE_INDEX === $pageName) {
+        if(Crud::PAGE_INDEX !== $pageName){
+            yield EmailField::new('email');
+            yield TextField::new('address');
+            yield TextField::new('zipcode');
+            yield TextField::new('city');
+        } else {
+            $createdAt = DateTimeField::new('createdAt')->setFormat("dd-MM-yyyy HH:mm");
             yield $createdAt;
         }
     }

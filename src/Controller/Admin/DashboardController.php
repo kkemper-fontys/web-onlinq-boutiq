@@ -6,6 +6,7 @@ use App\Entity\Products;
 use App\Entity\Customers;
 
 use App\Entity\Tags;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -32,6 +33,12 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Web Onlinq Boutiq');
+    }
+
+    function configureAssets(): Assets
+    {
+        return Assets::new()
+            ->addJsFile('bundles/fosckeditor/ckeditor.js');
     }
 
     public function configureMenuItems(): iterable
