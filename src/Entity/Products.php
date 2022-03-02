@@ -38,6 +38,9 @@ class Products
     #[ORM\Column(type: 'json', nullable: true)]
     private $images = [];
 
+    #[ORM\Column(type: 'boolean')]
+    private $deleted;
+
     public function __construct()
     {
         $this->Tags = new ArrayCollection();
@@ -140,6 +143,18 @@ class Products
     public function setImages(?array $images): self
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    public function getDeleted(): ?bool
+    {
+        return $this->deleted;
+    }
+
+    public function setDeleted(bool $deleted): self
+    {
+        $this->deleted = $deleted;
 
         return $this;
     }
