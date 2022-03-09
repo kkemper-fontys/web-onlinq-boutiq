@@ -2,22 +2,23 @@
 
 namespace App\Entity;
 
-use App\Repository\OrderRulesRepository;
+use App\Repository\OrderLinesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: OrderRulesRepository::class)]
-class OrderRules
+#[ORM\Entity(repositoryClass: OrderLinesRepository::class)]
+#[ORM\Table(name: 'order_rules')]
+class OrderLines
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\ManyToOne(targetEntity: orders::class)]
+    #[ORM\ManyToOne(targetEntity: Order::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $orders;
 
-    #[ORM\ManyToOne(targetEntity: products::class)]
+    #[ORM\ManyToOne(targetEntity: Product::class)]
     #[ORM\JoinColumn(nullable: false)]
     private $product;
 
@@ -32,24 +33,24 @@ class OrderRules
         return $this->id;
     }
 
-    public function getOrders(): ?orders
+    public function getOrders(): ?Order
     {
         return $this->orders;
     }
 
-    public function setOrders(?orders $orders): self
+    public function setOrders(?Order $orders): self
     {
         $this->orders = $orders;
 
         return $this;
     }
 
-    public function getProduct(): ?products
+    public function getProduct(): ?Product
     {
         return $this->product;
     }
 
-    public function setProduct(?products $product): self
+    public function setProduct(?Product $product): self
     {
         $this->product = $product;
 

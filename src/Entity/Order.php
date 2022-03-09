@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\OrdersRepository;
+use App\Repository\OrderRepository;
 use Doctrine\ORM\Mapping as ORM;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 
-#[ORM\Entity(repositoryClass: OrdersRepository::class)]
+#[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: 'orders')]
-class Orders
+class Order
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,7 +18,7 @@ class Orders
     #[ORM\Column(type: 'datetime_immutable')]
     private $createdAt;
 
-    #[ORM\OneToOne(targetEntity: Customers::class, cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(targetEntity: Customer::class, cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private $customer;
 
@@ -39,12 +39,12 @@ class Orders
         return $this;
     }
 
-    public function getCustomer(): ?Customers
+    public function getCustomer(): ?Customer
     {
         return $this->customer;
     }
 
-    public function setCustomer(Customers $customer): self
+    public function setCustomer(Customer $customer): self
     {
         $this->customer = $customer;
 

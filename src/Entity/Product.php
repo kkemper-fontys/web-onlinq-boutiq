@@ -9,7 +9,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductsRepository::class)]
-class Products
+#[ORM\Table(name: 'products')]
+class Product
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -33,6 +34,8 @@ class Products
     private $unit_type;
 
     #[ORM\ManyToMany(targetEntity: Tags::class)]
+    #[ORM\JoinTable(name:"products_tags")]
+    #[ORM\JoinColumn(name: "products_id", referencedColumnName: "id")]
     private $Tags;
 
     #[ORM\Column(type: 'json', nullable: true)]

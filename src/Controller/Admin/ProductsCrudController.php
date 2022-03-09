@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Products;
+use App\Entity\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -19,14 +19,14 @@ class ProductsCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Products::class;
+        return Product::class;
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
             ->setEntityLabelInSingular('Product')
-            ->setEntityLabelInPlural('Products')
+            ->setEntityLabelInPlural('Product')
             ->showEntityActionsInlined()
             ->renderContentMaximized()
             ->addFormTheme('@FOSCKEditor/Form/ckeditor_widget.html.twig')

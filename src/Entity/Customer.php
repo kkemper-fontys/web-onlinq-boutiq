@@ -6,7 +6,8 @@ use App\Repository\CustomersRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CustomersRepository::class)]
-class Customers
+#[ORM\Table(name: 'customers')]
+class Customer
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

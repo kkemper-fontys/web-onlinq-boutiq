@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Customers;
+use App\Entity\Customer;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
@@ -13,14 +13,14 @@ class CustomersCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Customers::class;
+        return Customer::class;
     }
 
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
             ->setEntityLabelInSingular('Customer')
-            ->setEntityLabelInPlural('Customers')
+            ->setEntityLabelInPlural('Customer')
             ->showEntityActionsInlined()
             ->renderContentMaximized()
         ;
