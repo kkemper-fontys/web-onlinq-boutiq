@@ -4,9 +4,11 @@ namespace App\Entity;
 
 use App\Repository\OrderLinesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Core\Annotation\ApiResource;
 
 #[ORM\Entity(repositoryClass: OrderLinesRepository::class)]
 #[ORM\Table(name: 'order_rules')]
+#[ApiResource]
 class OrderLines
 {
     #[ORM\Id]

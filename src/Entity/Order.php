@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\OrderRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 
 #[ORM\Entity(repositoryClass: OrderRepository::class)]
 #[ORM\Table(name: 'orders')]
+#[ApiResource]
 class Order
 {
     #[ORM\Id]

@@ -3,10 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\CustomersRepository;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CustomersRepository::class)]
 #[ORM\Table(name: 'customers')]
+#[ApiResource]
 class Customer
 {
     #[ORM\Id]
