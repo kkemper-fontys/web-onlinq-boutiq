@@ -41,10 +41,14 @@ class Order
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $paymentStatus;
 
+    #[ORM\OneToMany(mappedBy: 'masterOrder', targetEntity: OrderCoupon::class)]
+    private $couponLines;
+
     public function __construct()
     {
         $this->orderLines = new ArrayCollection();
         $this->createdAt  = new \DateTimeImmutable("now");
+        $this->couponLines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -150,6 +154,36 @@ class Order
     public function setPaymentStatus(?string $paymentStatus): self
     {
         $this->paymentStatus = $paymentStatus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, OrderCoupon>
+     */
+    public function getCouponLines(): Collection
+    {
+        return $this->couponLines;
+    }
+
+    public function addCouponLine(OrderCoupon $couponLine): self
+    {
+        if (!$this->couponLines->contains($couponLine)) {
+            $this->couponLines[] = $couponLine;
+            $couponLine->setMasterOrder($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCouponLine(OrderCoupon $couponLine): self
+    {
+        if ($this->couponLines->removeElement($couponLine)) {
+            // set the owning side to null (unless already changed)
+            if ($couponLine->getMasterOrder() === $this) {
+                $couponLine->setMasterOrder(null);
+            }
+        }
 
         return $this;
     }
