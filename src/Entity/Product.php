@@ -36,7 +36,7 @@ class Product
     private $unit_type;
 
     #[ORM\ManyToMany(targetEntity: Tags::class)]
-    #[ORM\JoinTable(name:"products_tags")]
+    #[ORM\JoinTable(name: "products_tags")]
     #[ORM\JoinColumn(name: "products_id", referencedColumnName: "id")]
     private $Tags;
 
@@ -44,7 +44,16 @@ class Product
     private $images = [];
 
     #[ORM\Column(type: 'boolean')]
-    private $deleted;
+    private $deleted = false;
+
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private $onSale;
+
+    #[ORM\Column(type: 'decimal', precision: 8, scale: 2, nullable: true)]
+    private $originalPrice;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private $subtitle;
 
     public function __construct()
     {
@@ -160,6 +169,42 @@ class Product
     public function setDeleted(bool $deleted): self
     {
         $this->deleted = $deleted;
+
+        return $this;
+    }
+
+    public function getOnSale(): ?bool
+    {
+        return $this->onSale;
+    }
+
+    public function setOnSale(?bool $onSale): self
+    {
+        $this->onSale = $onSale;
+
+        return $this;
+    }
+
+    public function getOriginalPrice(): ?string
+    {
+        return $this->originalPrice;
+    }
+
+    public function setOriginalPrice(?string $originalPrice): self
+    {
+        $this->originalPrice = $originalPrice;
+
+        return $this;
+    }
+
+    public function getSubtitle(): ?string
+    {
+        return $this->subtitle;
+    }
+
+    public function setSubtitle(?string $subtitle): self
+    {
+        $this->subtitle = $subtitle;
 
         return $this;
     }

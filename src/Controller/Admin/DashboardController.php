@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Coupon;
 use App\Entity\Order;
 use App\Entity\Product;
 use App\Entity\Customer;
@@ -50,5 +51,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Product', 'fas fa-box', Product::class);
         yield MenuItem::linkToCrud('Tags', 'fas fa-tags', Tags::class);
         yield MenuItem::linkToCrud('Order', 'fas fa-shopping-basket', Order::class);
+        yield MenuItem::linkToCrud('Coupons', 'fas fa-percent', Coupon::class);
     }
 }

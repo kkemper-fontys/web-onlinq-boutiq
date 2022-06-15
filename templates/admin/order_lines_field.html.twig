@@ -1,0 +1,20 @@
+{# @var ea \EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext #}
+{# @var field \EasyCorp\Bundle\EasyAdminBundle\Dto\FieldDto #}
+{# @var entity \EasyCorp\Bundle\EasyAdminBundle\Dto\EntityDto #}
+{# this is a bit ugly, but Twig doesn't have a 'is numeric' test #}
+<table width="100%">
+    <tr>
+        <td><b>Productnaam:</b></td>
+        <td><b>Aantal:</b></td>
+        <td><b>Prijs p/s:</b></td>
+        <td><b>Totaalprijs:</b></td>
+    </tr>
+{% for orderLine in field.value %}
+    <tr>
+        <td>{{ orderLine.product.name }}</td><td>{{ orderLine.amount }}</td>
+        <td>€ {{ (orderLine.price / 100)|number_format(2, ',', '.') }}</td>
+        <td>€ {{ ((orderLine.price / 100)*orderLine.amount)|number_format(2, ',', '.') }}</td>
+    </tr>
+{% endfor %}
+</table>
+{#{{ dump(field.value) }}#}
