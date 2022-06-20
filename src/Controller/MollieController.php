@@ -89,7 +89,7 @@ class MollieController extends AbstractController
             $order->setPaymentStatus("chargedback");
         }
 
-        $mailer->send($email);
+        $mailer->send($emgitail);
         $response->setContent('No webhook used');
 
         return $response;

@@ -27,7 +27,7 @@ class TagsCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield TextField::new('name');
-        yield TextareaField::new('description');
+        yield TextField::new('name')->setLabel('Naam');
+        yield TextareaField::new('description')->setLabel('Beschrijving');
     }
 }

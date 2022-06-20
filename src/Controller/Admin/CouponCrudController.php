@@ -17,14 +17,21 @@ class CouponCrudController extends AbstractCrudController
         return Coupon::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->showEntityActionsInlined()
+            ->setDefaultSort(['id' => 'DESC']);
+    }
+
     public function configureFields(string $pageName): iterable
     {
         yield TextField::new('code')->setRequired(true);
-        yield MoneyField::new('priceReduction')->setCurrency('EUR')->setNumDecimals(2);
-        yield IntegerField::new('percentageReduction');
-        yield IntegerField::new('timesUsable');
+        yield MoneyField::new('priceReduction')->setCurrency('EUR')->setNumDecimals(2)->setLabel('Prijs korting');
+        yield IntegerField::new('percentageReduction')->setLabel('Percentage korting');
+        yield IntegerField::new('timesUsable')->setLabel('Aantal keer bruikbaar')->setHelp("vul 0 in voor onbeperkt");
         if (Crud::PAGE_INDEX === $pageName) {
-            yield IntegerField::new('timesUsed')->setHelp("vul 0 in voor onbeperkt");
+            yield IntegerField::new('timesUsed')->setLabel('Aantal keer gebruikt');
         }
     }
 }

@@ -31,7 +31,8 @@ class OrdersCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->showEntityActionsInlined();
+            ->showEntityActionsInlined()
+            ->setDefaultSort(['id' => 'DESC']);
     }
 
     public function configureActions(Actions $actions): Actions
@@ -53,16 +54,27 @@ class OrdersCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        yield AssociationField::new('customer')->autocomplete(true);
-        yield DateTimeField::new('createdAt');
+        if($pageName === Crud::PAGE_INDEX){
+            yield AssociationField::new('customer')->autocomplete()->setLabel('Klant');
+        } else {
+            yield AssociationField::new('customer')->autocomplete()->setLabel('Klant')
+                ->setTemplatePath('admin/customer_field.html.twig');
+        }
+
+        yield DateTimeField::new('createdAt')->setLabel('Aangemaakt op');
 
         if ($pageName === Crud::PAGE_INDEX) {
-            yield CollectionField::new('orderLines');
+            yield CollectionField::new('orderLines')->setLabel("Aantal orderregels");
         } else {
             yield CollectionField::new('orderLines')
                 ->setTemplatePath('admin/order_lines_field.html.twig');
+            yield CollectionField::new('couponLines')
+                ->setTemplatePath('admin/coupon_lines_field.html.twig');
             yield MoneyField::new('subTotal')->setCurrency('EUR');
         }
-        yield MoneyField::new('total')->setCurrency('EUR');
+        yield MoneyField::new('total')->setCurrency('EUR')->setLabel('Totaal');
+        if($pageName === Crud::PAGE_INDEX){
+            yield TextField::new('orderStatus');
+        }
     }
 }
